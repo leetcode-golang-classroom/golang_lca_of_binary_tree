@@ -33,6 +33,15 @@ func CreateBinaryTree(input *[]string) *TreeNode {
 	}
 	return tree
 }
+
+func BenchmarkTest(b *testing.B) {
+	root := CreateBinaryTree(&[]string{"6", "2", "8", "0", "4", "7", "9", "null", "null", "3", "5"})
+	p := &TreeNode{Val: 2}
+	q := &TreeNode{Val: 4}
+	for idx := 0; idx < b.N; idx++ {
+		lowestCommonAncestor(root, p, q)
+	}
+}
 func Test_lowestCommonAncestor(t *testing.T) {
 	type args struct {
 		root *TreeNode

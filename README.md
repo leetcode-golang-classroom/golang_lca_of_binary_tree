@@ -76,7 +76,35 @@ Output: 2
 如果都不再兩個條件代表當下結點就是共同組結點，因為由根結點往下搜尋，因此會是最小子結點
 
 ## 程式碼
+```golang
+package sol
 
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val   int
+ *     Left  *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
+func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+	small := p
+	large := q
+	if p.Val > q.Val {
+		small = q
+		large = p
+	}
+	if root.Val > large.Val {
+		return lowestCommonAncestor(root.Left, small, large)
+	}
+	if root.Val < small.Val {
+		return lowestCommonAncestor(root.Right, small, large)
+	}
+	return root
+}
+
+```
 ## 困難點
 
 1. 需要理解 BST(二元搜尋樹)特性
